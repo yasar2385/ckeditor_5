@@ -20,15 +20,17 @@ setTimeout(function () {
     console.log('eeeeee');
     const editorData = editor.getData();
     console.log(editorData.length);
-    console.log(editor);
+    console.log(editor.model);
+    console.log(editor.editing);
   });
   if (editor && editor.model) {
-    console.log(editor.model);
+    //console.log(editor.model);
     editor.model.document.on('change:data', () => {
       console.log('The data has changed!');
     });
   }
   if (editor && editor.editing) {
+    console.log('editor.editing.view.document-key');
     editor.editing.view.document.on(
       'enter',
       (evt, data) => {
@@ -47,5 +49,7 @@ setTimeout(function () {
       },
       { priority: 'high' }
     );
+  } else {
+    console.log(typeof editor);
   }
 }, 7500);
