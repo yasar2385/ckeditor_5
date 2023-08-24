@@ -20,23 +20,32 @@ setTimeout(function () {
     console.log('eeeeee');
     const editorData = editor.getData();
     console.log(editorData.length);
+    console.log(editor);
   });
-  editor.model.document.on( 'change:data', () => {
-    console.log( 'The data has changed!' );
-} );
+  if (editor && editor.model) {
+    console.log(editor.model);
+    editor.model.document.on('change:data', () => {
+      console.log('The data has changed!');
+    });
+  }
+  if (editor && editor.editing) {
+    editor.editing.view.document.on(
+      'enter',
+      (evt, data) => {
+        data.preventDefault();
+        evt.stop();
 
-editor.editing.view.document.on( 'enter', ( evt, data ) => {
-  data.preventDefault();
-  evt.stop();
-
-  if ( data.isSoft ) {
-          editor.execute( 'enter' );
+        if (data.isSoft) {
+          editor.execute('enter');
           editor.editing.view.scrollToTheSelection();
 
           return;
-  }
+        }
 
-  editor.execute( 'shiftEnter' );
-  editor.editing.view.scrollToTheSelection();
-}, { priority: 'high' } );
+        editor.execute('shiftEnter');
+        editor.editing.view.scrollToTheSelection();
+      },
+      { priority: 'high' }
+    );
+  }
 }, 7500);
