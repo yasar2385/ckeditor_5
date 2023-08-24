@@ -21,4 +21,22 @@ setTimeout(function () {
     const editorData = editor.getData();
     console.log(editorData.length);
   });
+  editor.model.document.on( 'change:data', () => {
+    console.log( 'The data has changed!' );
+} );
+
+editor.editing.view.document.on( 'enter', ( evt, data ) => {
+  data.preventDefault();
+  evt.stop();
+
+  if ( data.isSoft ) {
+          editor.execute( 'enter' );
+          editor.editing.view.scrollToTheSelection();
+
+          return;
+  }
+
+  editor.execute( 'shiftEnter' );
+  editor.editing.view.scrollToTheSelection();
+}, { priority: 'high' } );
 }, 7500);
