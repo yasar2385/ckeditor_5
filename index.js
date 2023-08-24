@@ -13,11 +13,12 @@ setTimeout(function () {
     .catch((error) => {
       console.error(error);
     });
-
+  //const editorData = editor.getData();
+  //console.log(editorData.length);
   // Assuming there is a <button id="submit">Submit</button> in your application.
   document.querySelector('#submit').addEventListener('click', () => {
+    console.log('eeeeee');
     const editorData = editor.getData();
-
-    // ...
+    console.log(editorData.length);
   });
 }, 7500);
