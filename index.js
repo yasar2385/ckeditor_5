@@ -5,6 +5,8 @@ import './style.css';
 const appDiv = document.getElementById('app');
 appDiv.innerHTML = `<h1>JS Starter</h1>`;
 
-ClassicEditor.create(document.querySelector('#editor')).catch((error) => {
-  console.error(error);
-});
+setTimeout(function () {
+  ClassicEditor.create(document.querySelector('#editor')).catch((error) => {
+    console.error(error);
+  });
+}, 7500);
